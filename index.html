@@ -12,9 +12,55 @@
   <link rel = "stylesheet" href = "./Assets/css/style.css">
 </head>
 <body>
-  
+
+  <!-- High Score counter and Timer -->
+  <section class = 'top container'>
+    <div class = "row top">
+      <a class = "col-md-6 highScore" href='./highscore.html'>View Highscores</a>
+      <div class = "col-md-6 timer" id = "timer">0</div>
+    </div>
+  </section>
+
+  <!-- CONTENT FOR BODY OF QUIZ -->
+  <main class = "container">
+    
+    <div class = "row">
+
+      <!--Where the question will be outputted-->
+      <h1 class = "col-12 header" id = "header">
+        
+        <p id = "questionInfo">Coding Quiz Challenge</p>
+
+      </h1>
+
+      <!-- Where Questions will be outputted -->
+      <div class = "col-12 questions" id = "questions">
+
+        <p id="quizInfo">Come take my coding quiz!</p>
+
+        <br>
+
+        <button class ="start" id = "start">Start Quiz</button>
+
+        <!-- ANSWER CHOICES -->
+        <div id = "choices"> 
+          <button class="choiceBtn" id="answerOne" value ='correct'></button>
+          <button class="choiceBtn" id="answerTwo" value = 'wrong'></button>
+          <button class="choiceBtn" id="answerThree" value = 'wrong'></button>
+          <button class="choiceBtn" id="answerFour" value ='wrong'></button>
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+  </main>
+
 
   <!-- Links for Bootstrap -->
+  <script src = "./Assets/js/app.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
     integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
