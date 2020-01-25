@@ -1,12 +1,26 @@
-.highScore{
+.highScore {
   text-align: left;
 }
 
-.timer{
+.timer {
   text-align: right;
 }
 
-.top{
+.top {
   width: 100%;
   padding-top: 5px;
+}
+
+.header {
+  text-align: center;
+}
+
+.questions {
+  text-align: center;
+}
+.choiceBtn{
+  display: block;
+}
+#choices{
+  display: none;
 }

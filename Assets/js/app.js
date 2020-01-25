@@ -7,3 +7,21 @@ const reduceTimer = function (){
 }
 
 setInterval(reduceTimer, 1000)
+
+const showQuestions = function (){
+  // line to reveal player choices
+  document.getElementById('choices').style.display = 'block'
+  // hide start button
+  document.getElementById('start').style.display = 'none'
+  // hide quiz info
+  document.getElementById('quizInfo').style.display = 'none'
+}
+
+const startGame = function () {
+  showQuestions()
+
+}
+
+document.getElementById("start").addEventListener('click', startGame)
+
+
