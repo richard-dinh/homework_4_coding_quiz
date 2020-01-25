@@ -1,0 +1,12 @@
+.highScore{
+  text-align: left;
+}
+
+.timer{
+  text-align: right;
+}
+
+.top{
+  width: 100%;
+  padding-top: 5px;
+}
