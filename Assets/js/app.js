@@ -1,11 +1,12 @@
 
-let timer = 75
+let timer = 5
 let timeID = document.getElementById('timer')
 let question = document.getElementById('questionInfo')
 let answerOne = document.getElementById('answerOne')
 let answerTwo =  document.getElementById('answerTwo')
 let answerThree  = document.getElementById('answerThree')
 let answerFour = document.getElementById('answerFour')
+let isLastQuestion = false;
 const reduceTimer = function (){
   timer--
   timeID.textContent= timer
@@ -28,27 +29,53 @@ const calculateChoice = function (buttonID){
   }
   else{
     timer = timer - 10
+    console.log(timer)
     console.log('incorrect!')
   }
+  isButtonClicked = true;
+}
+const endScreen = function(){
+  question.textContent = 'THE END'
 }
 
 const firstQuestion = function(){
-  question.textContent = 'oogie boogie!'
-  answerOne.textContent = 'a'
-  answerTwo.textContent = 'b'
-  answerThree.textContent = 'c'
-  answerFour.textContent = 'd'
-  document.getElementById('choices').addEventListener('click', function(event){
+  question.textContent = 'Question 1!'
+  answerOne.textContent = 'correct'
+  answerOne.value = 'correct'
+  answerTwo.textContent = 'wrong'
+  answerTwo.value = 'incorrect'
+  answerThree.textContent = 'wrong'
+  answerThree.value = 'incorrect'
+  answerFour.textContent = 'wrong'
+  answerFour.value = 'incorrect'
+  document.getElementById('choices').addEventListener('click', function (event) {
     let playerChoice = event.target.value
     calculateChoice(playerChoice)
-  })
-  
+    secondQuestion()
+    })
+}
 
+const secondQuestion = function () {
+  question.textContent = 'Question 2!'
+  answerOne.textContent = 'wrong'
+  answerOne.value = 'incorrect'
+  answerTwo.textContent = 'Correct'
+  answerTwo.value = 'correct'
+  answerThree.textContent = 'Wrong'
+  answerThree.value = 'incorrect'
+  answerFour.textContent = 'Wrong'
+  answerFour.value = 'incorrect'
+  document.getElementById('choices').addEventListener('click', function (event) {
+    let playerChoice = event.target.value
+    calculateChoice(playerChoice)
+    endScreen()
+  })
 }
 
 const startGame = function () {
   showQuestions()
   firstQuestion()
+
 }
 
 document.getElementById("start").addEventListener('click', startGame)
