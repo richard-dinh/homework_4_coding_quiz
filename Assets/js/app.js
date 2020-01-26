@@ -1,18 +1,16 @@
 
-let timer = 5
+let timer = 10
 let timeID = document.getElementById('timer')
 let question = document.getElementById('questionInfo')
 let answerOne = document.getElementById('answerOne')
 let answerTwo =  document.getElementById('answerTwo')
 let answerThree  = document.getElementById('answerThree')
 let answerFour = document.getElementById('answerFour')
-let isLastQuestion = false;
+let playerChoice=''
 const reduceTimer = function (){
   timer--
   timeID.textContent= timer
 }
-
-setInterval(reduceTimer, 1000)
 
 const showQuestions = function (){
   // line to reveal player choices
@@ -32,7 +30,6 @@ const calculateChoice = function (buttonID){
     console.log(timer)
     console.log('incorrect!')
   }
-  isButtonClicked = true;
 }
 const endScreen = function(){
   question.textContent = 'THE END'
@@ -49,9 +46,11 @@ const firstQuestion = function(){
   answerFour.textContent = 'wrong'
   answerFour.value = 'incorrect'
   document.getElementById('choices').addEventListener('click', function (event) {
-    let playerChoice = event.target.value
+    playerChoice = event.target.value
     calculateChoice(playerChoice)
+    console.log('i am in question 1')
     secondQuestion()
+    console.log('i am in question 1 part 2')
     })
 }
 
@@ -66,16 +65,22 @@ const secondQuestion = function () {
   answerFour.textContent = 'Wrong'
   answerFour.value = 'incorrect'
   document.getElementById('choices').addEventListener('click', function (event) {
-    let playerChoice = event.target.value
+    playerChoice = event.target.value
     calculateChoice(playerChoice)
+    playerChoice = ''
     endScreen()
   })
 }
 
 const startGame = function () {
   showQuestions()
+  setInterval(reduceTimer, 1000)
+  setInterval(function(){
+    if(timer<=0){
+      endScreen()
+    }
+  },100)
   firstQuestion()
-
 }
 
 document.getElementById("start").addEventListener('click', startGame)
