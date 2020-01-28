@@ -20,7 +20,12 @@
 }
 .choiceBtn{
   display: block;
+  margin: 5px;
 }
 #choices{
   display: none;
+}
+
+.result{
+  color: lightgray;
 }
