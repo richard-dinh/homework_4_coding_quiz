@@ -8,6 +8,50 @@ let choiceThree  = document.getElementById('three')
 let choiceFour = document.getElementById('four')
 let playerChoice=''
 let interval
+
+let questionList[
+  {
+    text: 'Question 1',
+    optionOne: 'a',
+    optionTwo:'b',
+    optionThree:'c',
+    optionFour:'d'
+    isCorrect: 'a'
+  }
+  {
+    text: 'Question 2',
+    optionOne: 'a',
+    optionTwo:'b',
+    optionThree:'c',
+    optionFour:'d'
+    isCorrect: 'b'
+  }
+  {
+    text: 'Question 3',
+    optionOne: 'a',
+    optionTwo:'b',
+    optionThree:'c',
+    optionFour:'d'
+    isCorrect: 'c'
+  }
+  {
+    text: 'Question 4',
+    optionOne: 'a',
+    optionTwo:'b',
+    optionThree:'c',
+    optionFour:'d'
+    isCorrect: 'd'
+  }
+  {
+    text: 'Question 5',
+    optionOne: 'a',
+    optionTwo:'b',
+    optionThree:'c',
+    optionFour:'d'
+    isCorrect: 'a'
+  }
+  
+]
 const reduceTimer = function (){
   timer--
   timeID.textContent= timer
