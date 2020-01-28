@@ -9,49 +9,59 @@ let choiceFour = document.getElementById('four')
 let playerChoice=''
 let interval
 
-let questionList[
+let questionList = [
   {
     text: 'Question 1',
     optionOne: 'a',
     optionTwo:'b',
     optionThree:'c',
-    optionFour:'d'
+    optionFour:'d',
     isCorrect: 'a'
-  }
+  },
   {
     text: 'Question 2',
     optionOne: 'a',
     optionTwo:'b',
     optionThree:'c',
-    optionFour:'d'
+    optionFour:'d',
     isCorrect: 'b'
-  }
+  },
   {
     text: 'Question 3',
     optionOne: 'a',
     optionTwo:'b',
     optionThree:'c',
-    optionFour:'d'
+    optionFour:'d',
     isCorrect: 'c'
-  }
+  },
   {
     text: 'Question 4',
     optionOne: 'a',
     optionTwo:'b',
     optionThree:'c',
-    optionFour:'d'
+    optionFour:'d',
     isCorrect: 'd'
-  }
+  },
   {
     text: 'Question 5',
     optionOne: 'a',
     optionTwo:'b',
     optionThree:'c',
-    optionFour:'d'
+    optionFour:'d',
     isCorrect: 'a'
   }
-  
 ]
+
+const generateButtons = function(){
+  for(let i=0; i<4; i++){
+    var newBtn = document.createElement('button')
+    newBtn.setAttribute('class', 'choiceBtn')
+    newBtn.setAttribute('id', `${i}`)
+    newBtn.setAttribute('value', 'hi')
+    document.getElementById('choices').append(newBtn)
+  }
+
+}
 const reduceTimer = function (){
   timer--
   timeID.textContent= timer
@@ -193,13 +203,14 @@ const fifthQuestion = function () {
 
 const startGame = function () {
   showQuestions()
-  interval = setInterval(reduceTimer, 1000)
-  setInterval(function(){
-    if(timer<=0){
-      endScreen()
-    }
-  },100)
-  firstQuestion()
+  generateButtons()
+  // interval = setInterval(reduceTimer, 1000)
+  // setInterval(function(){
+  //   if(timer<=0){
+  //     endScreen()
+  //   }
+  // },100)
+  // firstQuestion()
   console.log('hello')
 }
 
