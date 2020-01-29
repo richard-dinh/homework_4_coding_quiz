@@ -16,8 +16,8 @@
   <!-- High Score counter and Timer -->
   <section class = 'top container'>
     <div class = "row top">
-      <a class = "col-md-6 highScore" href='./highscore.html'>View Highscores</a>
-      <div class = "col-md-6 timer" id = "timer">0</div>
+      <!-- <a class = "col-md-6 highScore" href=''>View Highscores</a> -->
+      <div class = "col-md-12 timer" id = "timer">0</div>
     </div>
   </section>
 
@@ -37,22 +37,29 @@
       <div class = "col-12 questions" id = "questions">
 
         <p id="quizInfo">Come take my coding quiz!</p>
-
         <br>
 
         <button class ="start" id = "start">Start Quiz</button>
 
         <!-- ANSWER CHOICES -->
-        <div id = "choices"> 
-          <!-- <button class="choiceBtn" id="one" value =''></button>
-          <button class="choiceBtn" id="two" value =''></button>
-          <button class="choiceBtn" id="three" value =''></button>
-          <button class="choiceBtn" id="four" value =''></button> -->
-          <br>
-        </div>
-
       </div>
+        <div id="choices">
+          <button class="choiceBtn" id="one" value=''></button>
+          <button class="choiceBtn" id="two" value=''></button>
+          <button class="choiceBtn" id="three" value=''></button>
+          <button class="choiceBtn" id="four" value=''></button>
+        </div>
       <h1 class="col-12 result" id="result"></h1>
+      <div class = "col-12" id='highScorePage'>
+        <form>
+          <p>
+            <label for ='name'>Enter Name:</label>
+            <input type = 'text' name = 'name' id = 'name'>
+          </p>
+          <button class = 'submit' id='addName'>Submit</button>
+        </form>
+      </div>
+      <button class='retake' id='retake'>Retake Quiz</button>
     </div>
 
   </main>
