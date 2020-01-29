@@ -33,3 +33,7 @@
 #highScorePage{
   display:none;
 }
+
+.listClass{
+  text-align:left;
+}

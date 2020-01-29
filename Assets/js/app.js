@@ -148,7 +148,8 @@ const endScreen = function () {
   clearInterval(interval)
   document.getElementById('choices').style.display = 'none'
   document.getElementById('timer').style.display = 'none'
-  document.getElementById('highScorePage').style.display = 'block'
+  let highScorePage = document.getElementById('highScorePage')
+  highScorePage.style.display = 'block'
   let displayInfo = document.getElementById('quizInfo')
   displayInfo.style.display = 'block'
   if(timer<0){
@@ -164,13 +165,27 @@ const endScreen = function () {
         score: timer
       }
     )
+    displayHighScores()
   })
   console.log(playerScores)
-  displayHighScores()
 }
 
-const displayHighScores = function(){
-  
+const displayHighScores = ()=>{
+    //hide user input prompt
+    let displayInfo = document.getElementById('quizInfo')
+    let item
+    let list = document.createElement('ul')
+    list.setAttribute('class', 'listClass')
+    highScorePage.style.display = 'none'
+    question.textContent = 'High Scores'
+    displayInfo.innerHTML =''
+    playerScores.forEach((elem,index)=>{
+     item= document.createElement('li')
+     item.innerHTML = `Player: ${elem.name}<br>
+     Score: ${elem.score}`
+     list.append(item)
+    })
+    displayInfo.append(list)
 }
 
 const reduceTimer = function () {
@@ -186,7 +201,6 @@ const startGame = function () {
     }
   },100)
   firstQuestion()
-  console.log('hello')
 }
 
 document.getElementById("start").addEventListener('click', startGame)
