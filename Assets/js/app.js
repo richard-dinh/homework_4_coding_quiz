@@ -1,5 +1,4 @@
-
-let timer = 75
+let timer
 let timeID = document.getElementById('timer')
 let question = document.getElementById('questionInfo')
 let choiceOne = document.getElementById('one')
@@ -13,29 +12,29 @@ let interval
 
 let questionList = [
   {
-    text: 'Question 1',
-    options: ['right', 'b', 'c', 'd'],
-    isCorrect: 'right'
+    text: 'What is the HTML tag under which one can write the JavaScript code',
+    options: ['<javascript>', '<scripted>', '<script>', '<js>'],
+    isCorrect: '<script>'
   },
   {
-    text: 'Question 2',
-    options: ['a', 'right', 'c', 'd'],
-    isCorrect: 'right'
+    text: 'Which of the following is the correct syntax to display “GeeksforGeeks” in an alert box using JavaScript?',
+    options: ['alertbox(“GeeksforGeeks”)', 'msg(“GeeksforGeeks”)', 'msgbox(“GeeksforGeeks”)', 'alert(“GeeksforGeeks”)'],
+    isCorrect: 'alert(“GeeksforGeeks”)'
   },
   {
-    text: 'Question 3',
-    options: ['a', 'b', 'right', 'd'],
-    isCorrect: 'right'
+    text: 'What is the correct syntax for referring to an external script called “geek.js”?',
+    options: ['<script src=”geek.js”>', '<script href=”geek.js”>', '<script ref=”geek.js”>', '<script name=”geek.js”>'],
+    isCorrect: '<script src=”geek.js”>'
   },
   {
-    text: 'Question 4',
-    options: ['a', 'b', 'c', 'right'],
-    isCorrect: 'right'
+    text: 'Which of the following is not a reserved word in JavaScript?',
+    options: ['interface', 'throws', 'program', 'short'],
+    isCorrect: 'short'
   },
   {
-    text: 'Question 5',
-    options: ['right', 'b', 'c','d'],
-    isCorrect: 'right'
+    text: 'The _______ method of an Array object adds and/or removes elements from an array.',
+    options: ['Reverse', 'Shift', 'Slice','Splice'],
+    isCorrect: 'Splice'
   }
 ]
 
@@ -47,6 +46,7 @@ const showQuestions = function (){
   document.getElementById('start').style.display = 'none'
   // hide quiz info
   document.getElementById('quizInfo').style.display = 'none'
+  document.getElementById('timer').style.display = ''
 }
 
 const calculateChoice = function (value, index){
@@ -82,7 +82,7 @@ const generateQuestion = function (index) {
     newBtn.setAttribute('id', `${i}`)
     //setting the text on the button
     newBtn.setAttribute('value', `${index.options[i]}`)
-    newBtn.textContent = index.options[i]
+    newBtn.textContent =`${i+1}: ${index.options[i]}`
     document.getElementById('choices').append(newBtn)
   }
 }
@@ -156,7 +156,7 @@ const endScreen = function () {
     timer = 0
   }
   displayInfo.innerHTML = `<p>Your Score is ${timer}</p>`
-  document.getElementById('addName').addEventListener('click',event =>{
+  document.getElementById('addName').addEventListener('click', function myClick(event){
     event.preventDefault()
     playerName = document.getElementById('name').value
     playerScores.push(
@@ -165,12 +165,15 @@ const endScreen = function () {
         score: timer
       }
     )
+    document.getElementById('addName').removeEventListener('click', myClick)
+    //empty out user input
+    document.getElementById('name').value = ''
     displayHighScores()
   })
   console.log(playerScores)
 }
 
-const displayHighScores = ()=>{
+const displayHighScores = function (){
     //hide user input prompt
     let displayInfo = document.getElementById('quizInfo')
     let item
@@ -186,13 +189,29 @@ const displayHighScores = ()=>{
      list.append(item)
     })
     displayInfo.append(list)
+    let retake = document.getElementById('retake')
+    retake.style.display = 'block'
+    retake.addEventListener('click', function myClick(event){
+      event.preventDefault()
+      restartQuiz()
+      retake.removeEventListener('click', myClick)
+    })
 }
 
+const restartQuiz=function(){
+  question.innerHTML = 'Coding Quiz Challenge'
+  document.getElementById('highScorePage').style.display = 'none'
+  document.getElementById('quizInfo').innerHTML = 'Come take my coding quiz!'
+  document.getElementById('start').style.display = 'block'
+  retake.style.display = 'none'
+}
 const reduceTimer = function () {
   timer--
   timeID.textContent = timer
 }
 const startGame = function () {
+  timer = 75
+  console.log(timer)
   showQuestions()
   interval = setInterval(reduceTimer, 1000)
   setInterval(function(){

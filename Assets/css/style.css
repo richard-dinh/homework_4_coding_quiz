@@ -1,6 +1,6 @@
-.highScore {
+/* .highScore {
   text-align: left;
-}
+} */
 
 .timer {
   text-align: right;
@@ -36,4 +36,11 @@
 
 .listClass{
   text-align:left;
+}
+.retake{
+  display:none;
+}
+
+.start{
+  margin: 0 auto;
 }
