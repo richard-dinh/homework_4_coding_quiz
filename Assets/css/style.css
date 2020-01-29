@@ -29,3 +29,7 @@
 .result{
   color: lightgray;
 }
+
+#highScorePage{
+  display:none;
+}

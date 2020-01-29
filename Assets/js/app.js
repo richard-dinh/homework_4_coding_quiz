@@ -7,50 +7,38 @@ let choiceTwo =  document.getElementById('two')
 let choiceThree  = document.getElementById('three')
 let choiceFour = document.getElementById('four')
 let playerChoice=''
+let playerScores =[]
+let playerName
 let interval
 
 let questionList = [
   {
     text: 'Question 1',
-    options: ['a', 'b', 'c', 'd'],
-    isCorrect: 'a'
+    options: ['right', 'b', 'c', 'd'],
+    isCorrect: 'right'
   },
   {
     text: 'Question 2',
-    options: ['a', 'b', 'c', 'd'],
-    isCorrect: 'b'
+    options: ['a', 'right', 'c', 'd'],
+    isCorrect: 'right'
   },
   {
     text: 'Question 3',
-    options: ['a', 'b', 'c', 'd'],
-    isCorrect: 'c'
+    options: ['a', 'b', 'right', 'd'],
+    isCorrect: 'right'
   },
   {
     text: 'Question 4',
-    options: ['a', 'b', 'c', 'd'],
-    isCorrect: 'd'
+    options: ['a', 'b', 'c', 'right'],
+    isCorrect: 'right'
   },
   {
     text: 'Question 5',
-    options: ['a', 'b', 'c','d'],
-    isCorrect: 'a'
+    options: ['right', 'b', 'c','d'],
+    isCorrect: 'right'
   }
 ]
 
-const generateQuestion = function(index){
-  //displaying the question text
-  document.getElementById('questionInfo').textContent=index.text
-  //generating buttons
-  for(let i=0; i<4; i++){
-    var newBtn = document.createElement('button')
-    newBtn.setAttribute('class', 'choiceBtn')
-    newBtn.setAttribute('id', `${i}`)
-    //setting the text on the button
-    newBtn.textContent = index.options[i]
-    document.getElementById('choices').append(newBtn)
-  }
-
-}
 
 const showQuestions = function (){
   // line to reveal player choices
@@ -61,8 +49,10 @@ const showQuestions = function (){
   document.getElementById('quizInfo').style.display = 'none'
 }
 
-const calculateChoice = function (buttonID){
-  if(buttonID === 'correct'){
+const calculateChoice = function (value, index){
+  console.log(questionList[index].isCorrect)
+  console.log(`value: ${value}`)
+  if(value === questionList[index].isCorrect){
     console.log('correct!')
     document.getElementById('result').textContent= `Correct!`
     setTimeout(function() {
@@ -79,21 +69,28 @@ const calculateChoice = function (buttonID){
     console.log('incorrect!')
   }
 }
-const endScreen = function(){
-  question.textContent = 'THE END'
-  clearInterval(interval)
-  document.getElementById('choices').style.display = 'none'
-  document.getElementById('timer').style.display = 'none'
-  let displayInfo = document.getElementById('quizInfo')
-  displayInfo.style.display = 'block'
-  displayInfo.textContent =  `Your Score is ${timer}`
-}
 
+const generateQuestion = function (index) {
+  //displaying the question text
+  //empty out buttons first so no duplicates
+  document.getElementById('choices').innerHTML = ''
+  document.getElementById('questionInfo').textContent = index.text
+  //generating buttons
+  for (let i = 0; i < 4; i++) {
+    var newBtn = document.createElement('button')
+    newBtn.setAttribute('class', 'choiceBtn')
+    newBtn.setAttribute('id', `${i}`)
+    //setting the text on the button
+    newBtn.setAttribute('value', `${index.options[i]}`)
+    newBtn.textContent = index.options[i]
+    document.getElementById('choices').append(newBtn)
+  }
+}
 const firstQuestion = function(){
-  generateQuestion(questionList(0))
+  generateQuestion(questionList[0])
   document.getElementById('choices').addEventListener('click', function myClick(event) {
     playerChoice = event.target.value
-    calculateChoice(playerChoice)
+    calculateChoice(playerChoice, 0)
     console.log('i am in first question')
     console.log(event)
     document.getElementById('choices').removeEventListener('click', myClick)
@@ -102,18 +99,10 @@ const firstQuestion = function(){
 }
 
 const secondQuestion = function () {
-  question.textContent = 'Question 2!'
-  choiceOne.textContent = 'wrong'
-  choiceOne.value = 'incorrect'
-  choiceTwo.textContent = 'Correct'
-  choiceTwo.value = 'correct'
-  choiceThree.textContent = 'Wrong'
-  choiceThree.value = 'incorrect'
-  choiceFour.textContent = 'Wrong'
-  choiceFour.value = 'incorrect'
+  generateQuestion(questionList[1])
   document.getElementById('choices').addEventListener('click', function myClick(event) {
     playerChoice = event.target.value
-    calculateChoice(playerChoice)
+    calculateChoice(playerChoice,1)
     console.log('i am in second question')
     console.log(event)
     document.getElementById('choices').removeEventListener('click', myClick)
@@ -121,18 +110,10 @@ const secondQuestion = function () {
   })
 }
 const thirdQuestion = function () {
-  question.textContent = 'Question 3!'
-  choiceOne.textContent = 'wrong'
-  choiceOne.value = 'incorrect'
-  choiceTwo.textContent = 'Correct'
-  choiceTwo.value = 'correct'
-  choiceThree.textContent = 'Wrong'
-  choiceThree.value = 'incorrect'
-  choiceFour.textContent = 'Wrong'
-  choiceFour.value = 'incorrect'
+  generateQuestion(questionList[2])
     document.getElementById('choices').addEventListener('click', function myClick(event) {
       playerChoice = event.target.value
-      calculateChoice(playerChoice)
+      calculateChoice(playerChoice,2)
       console.log('i am in third question')
       console.log(event)
       document.getElementById('choices').removeEventListener('click', myClick)
@@ -140,18 +121,10 @@ const thirdQuestion = function () {
     })
 }
 const fourthQuestion = function () {
-  question.textContent = 'Question 4!'
-  choiceOne.textContent = 'wrong'
-  choiceOne.value = 'incorrect'
-  choiceTwo.textContent = 'wrong'
-  choiceTwo.value = 'incorrect'
-  choiceThree.textContent = 'Wrong'
-  choiceThree.value = 'incorrect'
-  choiceFour.textContent = 'correct'
-  choiceFour.value = 'correct'
+  generateQuestion(questionList[3])
     document.getElementById('choices').addEventListener('click', function myClick(event) {
       playerChoice = event.target.value
-      calculateChoice(playerChoice)
+      calculateChoice(playerChoice,3)
       console.log('i am in fourth question')
       console.log(event)
       document.getElementById('choices').removeEventListener('click', myClick)
@@ -159,23 +132,45 @@ const fourthQuestion = function () {
     })
 }
 const fifthQuestion = function () {
-  question.textContent = 'Question 5!'
-  choiceOne.textContent = 'wrong'
-  choiceOne.value = 'incorrect'
-  choiceTwo.textContent = 'wrong'
-  choiceTwo.value = 'incorrect'
-  choiceThree.textContent = 'Correct'
-  choiceThree.value = 'correct'
-  choiceFour.textContent = 'Wrong'
-  choiceFour.value = 'incorrect'
+  generateQuestion(questionList[4])
     document.getElementById('choices').addEventListener('click', function myClick(event) {
       playerChoice = event.target.value
-      calculateChoice(playerChoice)
+      calculateChoice(playerChoice,4)
       console.log('i am in third question')
       console.log(event)
       document.getElementById('choices').removeEventListener('click', myClick)
       endScreen()
     })
+}
+
+const endScreen = function () {
+  question.textContent = 'THE END'
+  clearInterval(interval)
+  document.getElementById('choices').style.display = 'none'
+  document.getElementById('timer').style.display = 'none'
+  document.getElementById('highScorePage').style.display = 'block'
+  let displayInfo = document.getElementById('quizInfo')
+  displayInfo.style.display = 'block'
+  if(timer<0){
+    timer = 0
+  }
+  displayInfo.innerHTML = `<p>Your Score is ${timer}</p>`
+  document.getElementById('addName').addEventListener('click',event =>{
+    event.preventDefault()
+    playerName = document.getElementById('name').value
+    playerScores.push(
+      {
+        name: playerName,
+        score: timer
+      }
+    )
+  })
+  console.log(playerScores)
+  displayHighScores()
+}
+
+const displayHighScores = function(){
+  
 }
 
 const reduceTimer = function () {
@@ -184,13 +179,13 @@ const reduceTimer = function () {
 }
 const startGame = function () {
   showQuestions()
-  // interval = setInterval(reduceTimer, 1000)
-  // setInterval(function(){
-  //   if(timer<=0){
-  //     endScreen()
-  //   }
-  // },100)
-  // firstQuestion()
+  interval = setInterval(reduceTimer, 1000)
+  setInterval(function(){
+    if(timer<=0){
+      endScreen()
+    }
+  },100)
+  firstQuestion()
   console.log('hello')
 }
 
