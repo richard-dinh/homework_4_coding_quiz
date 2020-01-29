@@ -203,6 +203,7 @@ const restartQuiz=function(){
   document.getElementById('highScorePage').style.display = 'none'
   document.getElementById('quizInfo').innerHTML = 'Come take my coding quiz!'
   document.getElementById('start').style.display = 'block'
+  document.getElementById('timer').textContent = ''
   retake.style.display = 'none'
 }
 const reduceTimer = function () {
