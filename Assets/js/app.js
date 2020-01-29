@@ -77,13 +77,15 @@ const generateQuestion = function (index) {
   document.getElementById('questionInfo').textContent = index.text
   //generating buttons
   for (let i = 0; i < 4; i++) {
+    let loc = Math.floor(Math.random() * index.options.length)
     var newBtn = document.createElement('button')
     newBtn.setAttribute('class', 'choiceBtn')
     newBtn.setAttribute('id', `${i}`)
     //setting the text on the button
-    newBtn.setAttribute('value', `${index.options[i]}`)
-    newBtn.textContent =`${i+1}: ${index.options[i]}`
+    newBtn.setAttribute('value', `${index.options[loc]}`)
+    newBtn.textContent =`${i+1}: ${index.options[loc]}`
     document.getElementById('choices').append(newBtn)
+    index.options.splice(loc,1)
   }
 }
 const firstQuestion = function(){
@@ -205,6 +207,34 @@ const restartQuiz=function(){
   document.getElementById('start').style.display = 'block'
   document.getElementById('timer').textContent = ''
   retake.style.display = 'none'
+  //recreating questionList for reset
+  questionList = [
+    {
+      text: 'What is the HTML tag under which one can write the JavaScript code',
+      options: ['<javascript>', '<scripted>', '<script>', '<js>'],
+      isCorrect: '<script>'
+    },
+    {
+      text: 'Which of the following is the correct syntax to display “GeeksforGeeks” in an alert box using JavaScript?',
+      options: ['alertbox(“GeeksforGeeks”)', 'msg(“GeeksforGeeks”)', 'msgbox(“GeeksforGeeks”)', 'alert(“GeeksforGeeks”)'],
+      isCorrect: 'alert(“GeeksforGeeks”)'
+    },
+    {
+      text: 'What is the correct syntax for referring to an external script called “geek.js”?',
+      options: ['<script src=”geek.js”>', '<script href=”geek.js”>', '<script ref=”geek.js”>', '<script name=”geek.js”>'],
+      isCorrect: '<script src=”geek.js”>'
+    },
+    {
+      text: 'Which of the following is not a reserved word in JavaScript?',
+      options: ['interface', 'throws', 'program', 'short'],
+      isCorrect: 'short'
+    },
+    {
+      text: 'The _______ method of an Array object adds and/or removes elements from an array.',
+      options: ['Reverse', 'Shift', 'Slice', 'Splice'],
+      isCorrect: 'Splice'
+    }
+  ]
 }
 const reduceTimer = function () {
   timer--
