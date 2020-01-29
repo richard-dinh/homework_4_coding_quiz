@@ -12,59 +12,44 @@ let interval
 let questionList = [
   {
     text: 'Question 1',
-    optionOne: 'a',
-    optionTwo:'b',
-    optionThree:'c',
-    optionFour:'d',
+    options: ['a', 'b', 'c', 'd'],
     isCorrect: 'a'
   },
   {
     text: 'Question 2',
-    optionOne: 'a',
-    optionTwo:'b',
-    optionThree:'c',
-    optionFour:'d',
+    options: ['a', 'b', 'c', 'd'],
     isCorrect: 'b'
   },
   {
     text: 'Question 3',
-    optionOne: 'a',
-    optionTwo:'b',
-    optionThree:'c',
-    optionFour:'d',
+    options: ['a', 'b', 'c', 'd'],
     isCorrect: 'c'
   },
   {
     text: 'Question 4',
-    optionOne: 'a',
-    optionTwo:'b',
-    optionThree:'c',
-    optionFour:'d',
+    options: ['a', 'b', 'c', 'd'],
     isCorrect: 'd'
   },
   {
     text: 'Question 5',
-    optionOne: 'a',
-    optionTwo:'b',
-    optionThree:'c',
-    optionFour:'d',
+    options: ['a', 'b', 'c','d'],
     isCorrect: 'a'
   }
 ]
 
-const generateButtons = function(){
+const generateQuestion = function(index){
+  //displaying the question text
+  document.getElementById('questionInfo').textContent=index.text
+  //generating buttons
   for(let i=0; i<4; i++){
     var newBtn = document.createElement('button')
     newBtn.setAttribute('class', 'choiceBtn')
     newBtn.setAttribute('id', `${i}`)
-    newBtn.setAttribute('value', 'hi')
+    //setting the text on the button
+    newBtn.textContent = index.options[i]
     document.getElementById('choices').append(newBtn)
   }
 
-}
-const reduceTimer = function (){
-  timer--
-  timeID.textContent= timer
 }
 
 const showQuestions = function (){
@@ -105,15 +90,7 @@ const endScreen = function(){
 }
 
 const firstQuestion = function(){
-  question.textContent = 'Question 1!'
-  choiceOne.textContent = 'correct'
-  choiceOne.value = 'correct'
-  choiceTwo.textContent = 'wrong'
-  choiceTwo.value = 'incorrect'
-  choiceThree.textContent = 'wrong'
-  choiceThree.value = 'incorrect'
-  choiceFour.textContent = 'wrong'
-  choiceFour.value = 'incorrect'
+  generateQuestion(questionList(0))
   document.getElementById('choices').addEventListener('click', function myClick(event) {
     playerChoice = event.target.value
     calculateChoice(playerChoice)
@@ -201,9 +178,12 @@ const fifthQuestion = function () {
     })
 }
 
+const reduceTimer = function () {
+  timer--
+  timeID.textContent = timer
+}
 const startGame = function () {
   showQuestions()
-  generateButtons()
   // interval = setInterval(reduceTimer, 1000)
   // setInterval(function(){
   //   if(timer<=0){
